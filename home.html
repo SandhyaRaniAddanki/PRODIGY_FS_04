@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h2>Product List</h2>
+    <div class="product-container">
+        <%
+            List<Product> products = (List<Product>) request.getAttribute("products");
+            for (Product product : products) {
+                out.println("<div class='product'>");
+                out.println("<img src='" + product.getImage() + "' alt='" + product.getName() + "'>");
+                out.println("<h3>" + product.getName() + "</h3>");
+                out.println("<p>" + product.getDescription() + "</p>");
+                out.println("<p>$" + product.getPrice() + "</p>");
+                out.println("<form action='cart' method='post'>");
+                out.println("<input type='hidden' name='user_id' value='1'>");
+                out.println("<input type='hidden' name='product_id' value='" + product.getId() + "'>");
+                out.println("<input type='number' name='quantity' min='1' value='1'>");
+                out.println("<input type='submit' value='Add to Cart'>");
+                out.println("</form>");
+                out.println("</div>");
+            }
+        %>
+    </div>
+</body>
+</html>
